@@ -182,20 +182,25 @@ run: ## Run the application
 
 This allows to run `uvx make run` to start the application.
 
+At the time of writing this, `reflex` does not work well with `mypy` due to [issue #3374](https://github.com/reflex-dev/reflex/issues/3374). Therefore, comment out `mypy`-checks in `Makefile`.
+
 Run `uvx make test` to check that the tests pass.
 
 Before committing changes to Github, make sure to check the follwoing lines in `pyproject.toml`:
 
 ```toml
 [tool.setuptools]
-py-modules = ["app"]
+py-modules = ["refinice"]
 ...
 [tool.mypy]
-files = ["app"]
+files = ["refinice"]
 ...
 [tool.coverage.run]
 branch = true
 source = ["app"]
+...
+[tool.ruff]
+target-version = "py312"
 ```
 
 Edit the `mkdocs.yml` file to add several plugins to [makedocs-material](https://squidfunk.github.io/mkdocs-material/reference/) page.
@@ -274,7 +279,17 @@ document$.subscribe(() => {
 
 Test the documentation creation by running `uvx make docs`.
 
-# !!python/name:material.extensions.emoji.twemoji # noqa
+The precommit-hooks for `yaml`-checking do not work well with references in `mkdocs.yml`. Therefore, edit `pre-commit-config.yaml` to contai the following:
+
+```yaml
+- id: check-yaml
+  name: Check YAML (unsafe)
+  args: [--unsafe]
+  files: mkdocs.yml
+# check other yaml files normally
+- id: check-yaml
+  exclude: mkdocs.yml
+```
 
 Check, if a commit works by running the pre-commit-hooks manually:
 
@@ -286,4 +301,3 @@ uvx make check
 
 - [uv](https://uv.readthedocs.io/en/latest/)
 - [Cookiecutter Template](https://fpgmaas.github.io/cookiecutter-uv/tutorial/)
-- [NiceGUI modular project structure](https://nicegui.io/documentation/project_structure#modular)

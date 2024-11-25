@@ -6,6 +6,12 @@ repos:
       - id: check-merge-conflict
       - id: check-toml
       - id: check-yaml
+        name: Check YAML (unsafe)
+        args: [--unsafe]
+        files: mkdocs.yml
+      # check other yaml files normally
+      - id: check-yaml
+        exclude: mkdocs.yml
       - id: end-of-file-fixer
       - id: trailing-whitespace
 
