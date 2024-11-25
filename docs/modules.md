@@ -1,1 +1,1 @@
-::: refinice.foo
+::: refinice

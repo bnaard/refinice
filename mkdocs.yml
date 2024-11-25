@@ -10,6 +10,7 @@ copyright: Maintained by <a href="https://bnaard.com">bnaard</a>.
 nav:
   - Home: index.md
   - Modules: modules.md
+  - Development environment: devenv.md
 plugins:
   - search
   - mkdocstrings:
@@ -18,6 +19,9 @@ plugins:
           paths: [refinice]
 theme:
   name: material
+  features:
+    - content.code.copy
+    - content.code.annotate
   feature:
     tabs: true
   palette:
@@ -50,3 +54,41 @@ markdown_extensions:
       permalink: true
   - pymdownx.arithmatex:
       generic: true
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: pymdownx.superfences.fence_code_format
+  - attr_list
+  - md_in_html
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - footnotes
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - attr_list
+  - md_in_html
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: material.extensions.emoji.twemoji
+      emoji_generator: material.extensions.emoji.to_svg
+  - pymdownx.blocks.caption
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.arithmatex:
+      generic: true
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
